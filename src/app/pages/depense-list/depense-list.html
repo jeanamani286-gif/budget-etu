@@ -1,0 +1,38 @@
+<h2>Mes dépenses</h2>
+
+<div class="filtres">
+  <label>
+    Mois
+    <input type="month" [value]="mois()" (input)="changerMois($event)" />
+  </label>
+
+  <label>
+    Catégorie
+    <select [value]="categorie()" (change)="changerCategorie($event)">
+      <option value="">Toutes</option>
+      @for (c of categories; track c) {
+        <option [value]="c">{{ c }}</option>
+      }
+    </select>
+  </label>
+
+  <label>
+    Recherche
+    <input type="text" placeholder="Ex : courses" [value]="recherche()" (input)="changerRecherche($event)" />
+  </label>
+</div>
+
+@if (ressource.isLoading()) {
+  <p>Chargement…</p>
+} @else if (ressource.error()) {
+  <p class="erreur">Impossible de charger les dépenses.</p>
+  <button (click)="ressource.reload()">Réessayer</button>
+} @else {
+  <p class="total">Total : <strong>{{ total() | currency:'EUR' }}</strong></p>
+
+  @for (d of depensesFiltrees(); track d.id) {
+    <app-depense-card [depense]="d" />
+  } @empty {
+    <p class="vide">Aucune dépense ne correspond à cette sélection.</p>
+  }
+}

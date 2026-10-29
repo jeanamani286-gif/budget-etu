@@ -1,0 +1,6 @@
+form { display: flex; flex-direction: column; gap: 0.5rem; max-width: 400px; }
+label { display: flex; flex-direction: column; gap: 0.25rem; font-size: 0.9rem; margin-top: 0.5rem; }
+input, select { padding: 0.4rem; }
+.erreur { color: #dc2626; font-size: 0.8rem; margin: 0; }
+button { margin-top: 1rem; padding: 0.5rem; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }

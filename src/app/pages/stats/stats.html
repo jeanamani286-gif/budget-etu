@@ -1,0 +1,34 @@
+<h2>Statistiques du mois ({{ mois }})</h2>
+
+<label>
+  Budget mensuel (€)
+  <input type="number" [value]="budget()" (input)="changerBudget($event)" />
+</label>
+
+@if (depasse()) {
+  <p class="alerte">Attention : vous avez dépassé votre budget !</p>
+}
+
+<div class="barre">
+  <div class="remplissage" [class.rouge]="depasse()" [style.width.%]="pourcentage()"></div>
+</div>
+
+<ul>
+  <li>Total dépensé : <strong>{{ totalDepense() | currency:'EUR' }}</strong></li>
+  <li>Reste à dépenser : <strong>{{ reste() | currency:'EUR' }}</strong></li>
+  <li>Catégorie la plus coûteuse : <strong>{{ categorieTop() || 'aucune' }}</strong></li>
+</ul>
+
+@defer (on viewport) {
+  <h3>Par catégorie</h3>
+  @for (c of totauxCategories(); track c.nom) {
+    <div class="ligne-categorie">
+      <span>{{ c.nom }} : {{ c.somme | currency:'EUR' }}</span>
+      <div class="barre">
+        <div class="remplissage" [style.width.%]="c.pourcent"></div>
+      </div>
+    </div>
+  }
+} @placeholder {
+  <p class="placeholder">Chargement des catégories…</p>
+}

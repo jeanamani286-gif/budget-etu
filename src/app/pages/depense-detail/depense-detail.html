@@ -1,0 +1,16 @@
+<a routerLink="/depenses">← Retour à la liste</a>
+
+@if (depense.isLoading()) {
+  <p>Chargement…</p>
+} @else if (depense.error()) {
+  <p class="erreur">Cette dépense n'existe pas ou n'a pas pu être chargée.</p>
+} @else if (depense.value(); as d) {
+  <article class="fiche">
+    <h2>{{ d.libelle }}</h2>
+    <app-badge-categorie [categorie]="d.categorie" />
+    <p>Montant : <strong>{{ d.montant | currency:'EUR' }}</strong></p>
+    <p>Date : {{ d.date | date:'dd/MM/yyyy' }}</p>
+    <a [routerLink]="['/depenses', d.id, 'modifier']">Modifier</a>
+    <button class="danger" (click)="supprimer(d)">Supprimer</button>
+  </article>
+}

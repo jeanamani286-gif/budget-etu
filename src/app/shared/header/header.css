@@ -1,0 +1,5 @@
+header { display: flex; align-items: center; gap: 2rem; padding: 1rem; background: #1e293b; color: white; }
+h1 { margin: 0; font-size: 1.25rem; }
+nav { display: flex; gap: 1rem; }
+a { color: #cbd5e1; text-decoration: none; padding: 0.25rem 0.5rem; border-radius: 4px; }
+a.actif { background: #3b82f6; color: white; }

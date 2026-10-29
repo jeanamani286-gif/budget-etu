@@ -1,0 +1,50 @@
+<h2>Ajouter une dépense</h2>
+
+<form (submit)="$event.preventDefault(); enregistrer()">
+  <label>
+    Libellé
+    <input type="text" [formField]="f.libelle" />
+  </label>
+  @if (f.libelle().touched() && f.libelle().invalid()) {
+    @for (e of f.libelle().errors(); track e) {
+      <p class="erreur">{{ e.message }}</p>
+    }
+  }
+
+  <label>
+    Montant (€)
+    <input type="number" step="0.01" [formField]="f.montant" />
+  </label>
+  @if (f.montant().touched() && f.montant().invalid()) {
+    @for (e of f.montant().errors(); track e) {
+      <p class="erreur">{{ e.message }}</p>
+    }
+  }
+
+  <label>
+    Date
+    <input type="date" [formField]="f.date" />
+  </label>
+  @if (f.date().touched() && f.date().invalid()) {
+    @for (e of f.date().errors(); track e) {
+      <p class="erreur">{{ e.message }}</p>
+    }
+  }
+
+  <label>
+    Catégorie
+    <select [formField]="f.categorie">
+      <option value="">-- Choisir --</option>
+      @for (c of categories; track c) {
+        <option [value]="c">{{ c }}</option>
+      }
+    </select>
+  </label>
+  @if (f.categorie().touched() && f.categorie().invalid()) {
+    @for (e of f.categorie().errors(); track e) {
+      <p class="erreur">{{ e.message }}</p>
+    }
+  }
+
+  <button type="submit" [disabled]="f().invalid()">Enregistrer</button>
+</form>

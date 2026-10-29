@@ -1,0 +1,8 @@
+<div class="card">
+  <div class="infos">
+    <a [routerLink]="['/depenses', depense().id]"><strong>{{ depense().libelle }}</strong></a>
+    <span class="date">{{ depense().date | date:'dd/MM/yyyy' }}</span>
+  </div>
+  <app-badge-categorie [categorie]="depense().categorie" />
+  <span class="montant">{{ depense().montant | currency:'EUR' }}</span>
+</div>
